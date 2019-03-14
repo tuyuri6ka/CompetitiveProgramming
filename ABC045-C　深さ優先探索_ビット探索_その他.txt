@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Main{
+	public static void main(String args[])throws Exception{
+
+		Scanner sc = new Scanner(System.in);
+		long S = sc.nextLong();
+		long[] s = new long[15];
+		long[] t = new long[11];
+		t[0] = 1;
+		int j = 1;
+		long num;
+		for(int i=0;i<10;i++) {
+			s[i] = S%10;
+			S /= 10;
+			if(i>0) {
+				t[i] = t[i-1] * 10 + j;
+				j *= 2;
+			}
+			
+		}
+		num = s[0];
+		int ti = 1;
+		while(s[ti] != 0) {
+			num = num * 2 + s[ti] * t[ti];
+			ti ++;
+		}
+		System.out.println(num);
+	}
+}
+
+
+-----[‚³—Dæ’Tõ
+
+import java.util.Scanner;
+
+class Main{
+static long ans = 0;
+static String string;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);			//•¶š‚Ì“ü—Í
+		
+		string = sc.next();
+		dfs(1,0,0);
+		System.out.println(ans);		
+	}
+	
+	static void dfs(int p,long sum,int kireme){
+		long num =  Long.parseLong(string.substring(kireme, p));	
+	//	System.out.println(" p "+p);
+	//	System.out.println(num);
+
+		if(p == string.length()){
+			ans += sum+num;
+			return;
+		}
+		
+		dfs(p+1, sum,kireme);
+		
+		dfs(p+1, sum+num,p);	
+	}
+}
