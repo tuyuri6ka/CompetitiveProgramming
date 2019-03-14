@@ -13,5 +13,6 @@ public class Main {
             S = S.replace(leetBefore[i],leetAfter[i]);
         }
         System.out.println(S);
+
     }
 }
