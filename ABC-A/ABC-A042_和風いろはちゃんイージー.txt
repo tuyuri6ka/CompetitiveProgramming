@@ -1,0 +1,18 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int c = sc.nextInt();
+
+        if(((a == b && c == 7) || (b == c && a == 7) || (c == a && b == 7)) && a + b + c == 17){
+            System.out.println("YES");
+        }else{
+            System.out.println("NO");
+        }
+    }
+}
