@@ -1,2 +1,8 @@
-# AtCoder_AnswerCollection
-AtCoderContestの解法・別解の貯蔵庫
+#AtCoder_AnswerCollectionについて
+・AtCoderContestの解答・別解です。
+・あくまでtuyuri6kaが個人で書いたコードの記録です。
+
+#ファイル名
+「コンテスト名_問題番号とタイトル_補足」
+※補足には、『解答の際に利用した関数』『学んだこと』『別解（他人の参考コード）』などの
+　情報をメモとして追記しております。
