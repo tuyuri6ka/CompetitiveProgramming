@@ -1,0 +1,105 @@
+import java.util.*;
+
+
+public class Main {
+
+    
+    static int N, M;
+
+    static char[][] field;
+
+    
+    public static void main(String[] args) throws Exception {
+
+        
+        Scanner sc = new Scanner(System.in);
+
+        N = sc.nextInt();
+
+        M = sc.nextInt();
+
+        field = new char[N][M];
+    
+        
+        for(int i = 0; i < N; i++){
+
+            String line = sc.next();
+
+            for(int j = 0; j < M; j++){
+
+                field[i][j]= line.charAt(j);
+
+            }
+
+        }
+
+        solve(N,M,field);
+
+    }
+
+    
+    static void dfs(int x, int y,char field[][]){
+
+        field[x][y]= '.';
+
+        for(int dx = -1; dx <= 1;dx++){
+
+            for(int dy = -1; dy <=1; dy++){
+
+                int nx = x + dx;
+
+                int ny = y + dy;
+
+                
+
+                if(0 <= nx && nx < N && 0 <= ny && ny < M && field[nx][ny] == 'W') dfs(nx, ny,field);
+
+            }
+
+        }
+
+        return;
+
+    }
+
+
+    
+    static void solve(int N, int M, char field[][]){
+
+        int res = 0;
+
+        for(int i = 0; i < N; i++){
+
+            for(int j = 0; j < M; j++){
+
+                if(field[i][j] =='W'){
+
+                dfs(i,j,field);
+
+                res++;
+
+                }
+
+            }
+
+        }
+
+    System.out.println(res);
+
+    }
+
+}
+
+
+
+/*
+---“ü—Í—á---
+4 7
+.W...WW
+W...W..
+W.W..WW
+W.W..WWW
+
+ans 3
+------------
+*/
