@@ -1,4 +1,4 @@
-AtCoder_AnswerCollectionについて
+AtCoder_AnswerCollection
 ====
 ## 概要  
 ・AtCoder_AnswerCollectionはあくまでtuyuri6ka個人の書いたコードの記録です。<br>
