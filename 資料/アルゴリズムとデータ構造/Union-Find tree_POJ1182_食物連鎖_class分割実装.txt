@@ -1,0 +1,209 @@
+//以下、MainクラスとUnionFindTreeクラスをファイル分けして実装したコード
+
+//Mainクラス(Main.java)
+import java.util.*;
+
+public class Main {
+
+   
+ 
+    //ここから問題対処部分
+
+
+    static int N;
+    static int K;    
+    static int[] T;
+    static int[] X;
+
+    static int[] Y;
+
+    static UnionFindTree uft;
+
+    
+    public static void main(String[] args) throws Exception {
+
+        Scanner sc = new Scanner(System.in);
+
+        N = sc.nextInt();
+
+        K = sc.nextInt();
+
+
+        T = new int[N];
+
+        X = new int[N];
+
+        Y = new int[N];
+
+        uft = new UnionFindTree();
+
+
+        for(int i = 0; i < K; i++){
+
+            T[i] = sc.nextInt();
+
+            X[i] = sc.nextInt();
+
+            Y[i] = sc.nextInt();
+
+        }
+
+        solve();
+
+    }
+
+
+
+    static void solve(){
+
+        //Union-Findを初期化
+
+        uft.init(N * 3);
+
+        
+
+        int ans = 0;
+
+        for(int i = 0; i < K; i++){
+
+            int t = T[i];
+
+            int x = X[i] - 1, y = Y[i] -1;
+
+            
+            if(x < 0 || N <= x || y < 0|| N <= y){
+
+                ans++;
+
+                continue;
+
+            }
+
+            
+
+            if(t == 1){
+
+                if(uft.same(x,y + N) || uft.same(x, y + 2 * N)){
+
+                    ans++;
+
+                }else{
+
+                    uft.unite(x,y);
+
+                    uft.unite(x + N, y + N);
+
+                    uft.unite(x + N * 2, y + N * 2);
+
+                }
+
+            }else{
+
+                if(uft.same(x,y) || uft.same(x, y + 2 * N)){
+                    ans++;
+
+                }else{
+
+                    uft.unite(x, y + N);
+
+                    uft.unite(x + N, y + 2 * N);
+
+                    uft.unite(x + 2 * N, y);
+
+                }
+
+            }
+
+        }
+
+        System.out.println(ans);
+
+    }
+
+}
+
+
+//UnionFindTreeクラス（UnionFindTree.java）
+import java.util.*;
+
+public class UnionFindTree{
+
+
+    //Union-Find tree
+
+    static int[] par;   //親
+
+    static int[] rank;  //深さ
+
+    
+
+    static void init(int n){
+
+        par = new int[n];
+
+        rank = new int[n];
+
+        
+
+        for(int i = 0; i < n; i++){
+
+            par[i] = i;
+
+            rank[i] = 0;
+
+        }
+
+    }
+
+    
+
+    static int find(int x){
+
+        if(par[x] == x){
+
+            return x;
+
+        }else{
+
+            return par[x] = find(par[x]);
+
+        }
+
+    }
+
+    
+
+    static void unite(int x,int y){
+
+        x = find(x);
+
+        y = find(y);
+
+        if(x == y)return;
+
+        
+
+        if(rank[x] < rank[y]){
+
+            par[x] = y;
+
+        }else{
+
+            par[x] = y;
+
+            if(rank[x] == rank[y])rank[x]++;
+
+        }
+
+    }
+
+    
+
+    static boolean same(int x, int y){
+
+        return find(x) == find(y);
+
+    }
+
+}
+
