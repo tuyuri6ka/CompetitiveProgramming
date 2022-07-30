@@ -5,6 +5,11 @@ import (
 	"strconv"
 )
 
+type Card struct {
+	suit  string
+	value int
+}
+
 func main() {
 	// 標準入力を取得する
 	var N int
@@ -12,9 +17,12 @@ func main() {
 	input := inputSource(N)
 
 	// 問題に適した形に整形する
-	result := inputProcessing(input)
+	processingInput := inputProcessing(input)
+
+	result := bubbleSort(processingInput)
 
 	fmt.Println(result)
+
 }
 
 func inputSource(N int) []string {
@@ -26,13 +34,28 @@ func inputSource(N int) []string {
 	return input
 }
 
-func inputProcessing(input []string) []map[string]int {
-	result := make([]map[string]int, len(input), cap(input))
-	for i, _ := range input {
-		hash := make(map[string]int)
-		hash[input[i][:1]], _ = strconv.Atoi(input[i][1:])
-
-		result[i] = hash
+func inputProcessing(input []string) []Card {
+	result := make([]Card, len(input))
+	for i, v := range input {
+		result[i].suit = v[:1]
+		result[i].value, _ = strconv.Atoi(v[1:])
 	}
+	return result
+}
+
+func bubbleSort(card []Card) []Card {
+	result := card
+	for i := 0; i < len(result); i++ {
+		for j := len(result) - 1; j > i; j-- {
+			if result[j-1].value > result[j].value {
+				big := result[j-1].value
+				small := result[j].value
+
+				result[j-1].value = small
+				result[j].value = big
+			}
+		}
+	}
+
 	return result
 }
