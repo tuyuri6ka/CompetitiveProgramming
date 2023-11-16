@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		int M = sc.nextInt();
+
+		// 街と道路の番号が1からなのでハッシュに合わせる　
+		Map<Integer, ArrayList<Integer>> hash = new HashMap<>();
+		for (int i = 1; i <= N; i++) {
+			ArrayList<Integer> list = new ArrayList<>();
+			hash.put(i, list);
+		}
+
+		for (int i = 0; i < M; i++) {
+			int A = sc.nextInt();
+			int B = sc.nextInt();
+			hash.get(A).add(B);
+			hash.get(B).add(A);
+		}
+
+		for (int i = 1; i <= N; i++) {
+			Collections.sort(hash.get(i));
+			System.out.print(hash.get(i).size() + " ");
+
+			for (int j = 0; j < hash.get(i).size(); j++) {
+				System.out.print(hash.get(i).get(j) + " ");
+			}
+			System.out.println("");
+		}
+	}
+}
