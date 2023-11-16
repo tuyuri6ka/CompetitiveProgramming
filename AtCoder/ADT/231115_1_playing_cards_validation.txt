@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String[] S = new String[N];
+        for (int i = 0; i < N; i++) {
+            S[i] = sc.next();
+        }
+
+        boolean cond1 = true;
+        boolean cond2 = true;
+        boolean cond3 = true;
+
+        for (int i = 0; i < N; i++) {
+            char c = S[i].charAt(0);
+            if (Character.toString(c).matches("[HDCS]")) {
+                continue;
+            } else {
+                cond1 = false;
+            }
+        }
+
+        for (int i = 0; i < N; i++) {
+            char c = S[i].charAt(1);
+            if (Character.toString(c).matches("[A23456789TJQK]")) {
+                 continue;
+             } else {
+                 cond2 = false;
+             }
+		}
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (i == j) {
+                    continue;
+                }
+                if (S[i].equals(S[j])) {
+                    cond3 = false;
+                }
+            }
+        }
+
+        String ans = "No";
+        if (cond1 && cond2 && cond3) {
+            ans = "Yes";
+        }
+        System.out.println(ans);
+    }
+}
