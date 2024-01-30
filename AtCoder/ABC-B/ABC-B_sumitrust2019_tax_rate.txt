@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt();
+
+		// 元値q としてあり得る最小値は、q = [n/1.08]。
+		// n が小数点切り捨ての結果得られた値であることを踏まえると、
+		// q, q+1 の値を調べれば良い。
+		int q = (n * 100) / 108;
+		if ((int)(q * 1.08) == n) {
+			System.out.println(q);
+		} else if ((int)((q + 1) * 1.08) == n) {
+			System.out.println(q + 1);
+		} else {
+			System.out.println(":(");
+		}
+	}
+}
