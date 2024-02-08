@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+
+		int N = sc.nextInt();
+		int K = sc.nextInt();
+		int[] P = new int[N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < 3; j++) {
+				P[i] += sc.nextInt();
+			}
+		}
+
+		int[] Pm = Arrays.copyOf(P, N);
+		Arrays.sort(Pm);
+		Map<Integer, Integer> hash = new HashMap<>();
+		int rank = 1;
+		for (int i = N-1; i >= 0; i--) {
+			hash.put(rank, Pm[i]);
+			rank++;
+		}
+
+		for (int i = 0; i < N; i++) {
+			int point = P[i] + 300;
+			if (hash.get(K) <= point) {
+				System.out.println("Yes");
+			} else {
+				System.out.println("No");
+			}
+		}
+	}
+}
+
